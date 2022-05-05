@@ -10,7 +10,7 @@ export class BeneficiariesController {
 
   @Post()
   create(@Body() beneficiary: Beneficiary) {
-    return this.beneficiariesService.beneficiary(beneficiary);
+    return this.beneficiariesService.createBeneficiary(beneficiary);
   }
 
   @Get()
