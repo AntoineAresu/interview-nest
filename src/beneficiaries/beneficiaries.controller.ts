@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { Beneficiary } from '@prisma/client';
 import { BeneficiariesService } from './beneficiaries.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -14,8 +14,10 @@ export class BeneficiariesController {
   }
 
   @Get()
-  findAll() {
-    return this.beneficiariesService.beneficiaries({});
+  findAll(@Query() query) {
+    return this.beneficiariesService.beneficiaries({
+      where: { name: { contains: query.name } },
+    });
   }
 
   @Get(':id')
